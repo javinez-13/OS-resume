@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>John Kevin Javinez - Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <i class="fas fa-microchip"></i>
+                <span>John Kevin Javinez</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                <li><a href="#" class="nav-link" data-page="projects">Projects</a></li>
+                <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+        <div class="home-container">
+            <div class="home-left">
+                <div class="profile-image-container">
+                    <img src="assets/jk.jpg" alt="John Kevin Javinez" class="profile-image">
+                </div>
+            </div>
+            <div class="home-right">
+                <div class="welcome-text">WELCOME TO MY PORTFOLIO</div>
+                <h1 class="name-title">
+                    <span class="name-blue">I'm John Kevin</span> <span class="name-white">Javinez</span>
+                </h1>
+                <p class="role-text">Full Stack Web Developer & UI/UX Designer</p>
+                <p class="description-text">
+                    Crafting digital experiences through code and design. Currently pursuing BSIT while building innovative web solutions with modern technologies.
+                </p>
+                <div class="cta-buttons">
+                    <button class="btn btn-primary" id="view-resume-btn">
+                        <i class="fas fa-file-alt"></i>
+                        View Resume
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button class="btn btn-secondary">
+                        Get In Touch
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+        <div class="about-container">
+            <div class="about-header">
+                <div class="icon-container">
+                    <i class="fas fa-user"></i>
+                </div>
+                <h1 class="page-title">About Me</h1>
+                <p class="page-subtitle">Get to know more about my journey and skills</p>
+            </div>
+            <div class="about-content">
+                <div class="about-card">
+                    <h2>Who I Am</h2>
+                    <p>
+                        I'm a passionate Full Stack Web Developer and UI/UX Designer currently pursuing a Bachelor of Science in Information Technology (BSIT). 
+                        I love creating digital experiences that are both functional and beautiful, combining technical expertise with creative design.
+                    </p>
+                </div>
+                <div class="about-card">
+                    <h2>My Skills</h2>
+                    <div class="skills-grid">
+                        <div class="skill-item">
+                            <i class="fab fa-html5"></i>
+                            <span>HTML/CSS</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-js"></i>
+                            <span>JavaScript</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-react"></i>
+                            <span>React</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fab fa-node"></i>
+                            <span>Node.js</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-database"></i>
+                            <span>Database</span>
+                        </div>
+                        <div class="skill-item">
+                            <i class="fas fa-paint-brush"></i>
+                            <span>UI/UX Design</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-card">
+                    <h2>Education</h2>
+                    <p>
+                        <strong>Bachelor of Science in Information Technology (BSIT)</strong><br>
+                        Currently pursuing my degree while working on various projects and building my portfolio.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Page - SRTF CPU Scheduling -->
+    <section id="projects" class="page">
+        <div class="projects-container">
+            <div class="project-header">
+                <div class="project-icon">
+                    <i class="fas fa-microchip"></i>
+                </div>
+                <h1 class="page-title">SRTF CPU Scheduling</h1>
+                <p class="page-subtitle">Interactive visualization of Shortest Remaining Time First CPU scheduling algorithm</p>
+            </div>
+
+            <div class="processes-panel">
+                <div class="panel-header">
+                    <i class="fas fa-code"></i>
+                    <span>Processes</span>
+                </div>
+                <div class="processes-content">
+                    <table class="processes-table">
+                        <thead>
+                            <tr>
+                                <th>Process</th>
+                                <th>Arrival</th>
+                                <th>Burst</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="processes-tbody">
+                            <tr class="empty-row">
+                                <td colspan="4">No processes added. Click 'Add Process' to get started.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <button class="btn btn-primary" id="add-process-btn">
+                        <i class="fas fa-plus"></i>
+                        Add Process
+                    </button>
+                </div>
+            </div>
+
+            <div class="control-buttons">
+                <button class="btn btn-primary" id="run-algorithm-btn">
+                    <i class="fas fa-play"></i>
+                    Run Algorithm
+                </button>
+                <button class="btn btn-secondary" id="reset-btn">
+                    <i class="fas fa-redo"></i>
+                    Reset
+                </button>
+            </div>
+
+            <div id="results-panel" class="results-panel hidden">
+                <div class="panel-header">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Results</span>
+                </div>
+                <div class="results-content">
+                    <div id="gantt-chart" class="gantt-chart"></div>
+                    <div class="metrics">
+                        <div class="metric-item">
+                            <span class="metric-label">Average Waiting Time:</span>
+                            <span class="metric-value" id="avg-waiting-time">-</span>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-label">Average Turnaround Time:</span>
+                            <span class="metric-value" id="avg-turnaround-time">-</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Page -->
+    <section id="contact" class="page">
+        <div class="contact-container">
+            <div class="contact-header">
+                <div class="icon-container">
+                    <i class="fas fa-paper-plane"></i>
+                </div>
+                <h1 class="page-title">Get In Touch</h1>
+                <p class="page-subtitle">
+                    Let's collaborate and bring your ideas to life. I'm always open to discussing new projects and opportunities.
+                </p>
+            </div>
+
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-icon email-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>Email</h3>
+                    <a href="mailto:javinezsarra@gmail.com" class="contact-link">javinezsarra@gmail.com</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon github-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>GitHub</h3>
+                    <a href="https://github.com/javinez-13" target="_blank" class="contact-link">javinez-13</a>
+                </div>
+            </div>
+
+            <div class="work-together-card">
+                <h2>Let's Work Together</h2>
+                <p>
+                    Whether you have a project in mind, want to collaborate, or just want to say hello, I'd love to hear from you. 
+                    Feel free to reach out through any of the channels above.
+                </p>
+                <div class="status-info">
+                    <div class="status-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Philippines</span>
+                    </div>
+                    <div class="status-item">
+                        <i class="fas fa-paper-plane"></i>
+                        <span>Available for Projects</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Process Modal -->
+    <div id="process-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Add Process</h2>
+                <button class="modal-close" id="close-modal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="process-name">Process Name:</label>
+                    <input type="text" id="process-name" placeholder="e.g., P1" required>
+                </div>
+                <div class="form-group">
+                    <label for="arrival-time">Arrival Time:</label>
+                    <input type="number" id="arrival-time" min="0" placeholder="0" required>
+                </div>
+                <div class="form-group">
+                    <label for="burst-time">Burst Time:</label>
+                    <input type="number" id="burst-time" min="1" placeholder="5" required>
+                </div>
+                <button class="btn btn-primary" id="submit-process">Add Process</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Resume Viewer Modal -->
+    <div id="resume-modal" class="modal resume-modal">
+        <div class="modal-content resume-modal-content">
+            <div class="modal-header">
+                <h2>My Resume</h2>
+                <div class="resume-actions">
+                    <button class="btn btn-primary" id="download-resume-btn">
+                        <i class="fas fa-download"></i>
+                        Download Resume
+                    </button>
+                    <button class="modal-close" id="close-resume-modal">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body resume-modal-body">
+                <div class="resume-container">
+                    <img src="assets/javs-resume.jpg" alt="John Kevin Javinez Resume" id="resume-image" class="resume-image">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+

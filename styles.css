@@ -1,0 +1,791 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* FUTURISTIC GREEN PALETTE */
+    --primary-green: #00FF77; /* Cyber Green: Primary Accent/Glow */
+    --secondary-blue: #00BFFF; /* Electric Blue: Secondary Accent */
+    --dark-bg: #0A0A0E;      /* Deep Space Black: Main Background */
+    --darker-bg: #1A1C24;    /* Slightly lighter for panels/tables */
+    --card-bg: #1A1C24;      /* Card/Panel Backgrounds */
+    --text-white: #E0E0E0;   /* Digital White: Primary Text */
+    --text-light: #A0A0A0;   /* Cool Gray: Secondary Text */
+    --border-color: #33363F; /* Cool Gray: Structural Borders */
+    --red-accent: #e74c3c;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-white);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: var(--dark-bg); /* Use main dark for top bar */
+    padding: 1rem 2rem;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--text-white);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.logo i {
+    color: var(--primary-green);
+    font-size: 1.5rem;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+}
+
+.nav-link {
+    color: var(--text-white);
+    text-decoration: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: var(--primary-green); /* Green hover effect */
+}
+
+.nav-link.active {
+    background-color: transparent;
+    color: var(--primary-green); /* Active link is green glow */
+    border-bottom: 2px solid var(--primary-green);
+    text-shadow: 0 0 5px rgba(0, 255, 119, 0.7); /* Subtle text glow */
+}
+
+/* Pages */
+.page {
+    display: none;
+    padding-top: 80px;
+    min-height: 100vh;
+    padding-bottom: 2rem;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Home Page */
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 4rem;
+    align-items: center;
+    min-height: calc(100vh - 80px);
+}
+
+.home-left {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Profile Image Glow Effect - Circular with Concentric Rings */
+.profile-image-container {
+    width: 100%;
+    max-width: 400px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.profile-image {
+    width: 100%;
+    max-width: 360px;
+    height: 360px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+    position: relative;
+    z-index: 2;
+    border: 6px solid var(--secondary-blue);
+    box-shadow: 
+        0 0 20px var(--secondary-blue),
+        0 0 40px rgba(0, 191, 255, 0.5),
+        0 0 0 12px var(--primary-green),
+        0 0 30px var(--primary-green),
+        0 0 60px rgba(0, 255, 119, 0.6);
+    filter: brightness(0.95);
+}
+
+.home-right {
+    padding: 2rem;
+}
+
+.welcome-text {
+    color: var(--primary-green);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.name-title {
+    font-size: 3.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.name-blue {
+    color: var(--primary-green); /* Changed to green to match image */
+}
+
+.name-white {
+    color: var(--text-white);
+}
+
+.role-text {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    margin-bottom: 1.5rem;
+}
+
+.description-text {
+    font-size: 1rem;
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Buttons */
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Primary Button - Cyber Green Glow */
+.btn-primary {
+    background-color: transparent;
+    color: var(--primary-green);
+    border: 2px solid var(--primary-green);
+    box-shadow: 0 0 8px rgba(0, 255, 119, 0.3);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-green);
+    color: var(--dark-bg);
+    transform: translateY(-2px);
+    box-shadow: 0 0 15px var(--primary-green), 0 0 30px rgba(0, 255, 119, 0.6);
+}
+
+/* Secondary Button - Electric Blue Accent */
+.btn-secondary {
+    background-color: transparent;
+    color: var(--secondary-blue);
+    border: 2px solid var(--secondary-blue);
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.3);
+}
+
+.btn-secondary:hover {
+    background-color: var(--secondary-blue);
+    color: var(--dark-bg);
+    box-shadow: 0 0 15px var(--secondary-blue), 0 0 30px rgba(0, 191, 255, 0.6);
+}
+
+/* About Page */
+.about-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.icon-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--primary-green), #00E06B);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: var(--dark-bg); /* Dark icon on bright background */
+    box-shadow: 0 0 15px var(--primary-green);
+}
+
+.page-title {
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    margin-bottom: 1rem;
+    text-shadow: 0 0 5px rgba(0, 255, 119, 0.5);
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-light);
+}
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.about-card h2 {
+    color: var(--primary-green);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.about-card p {
+    color: var(--text-light);
+    line-height: 1.8;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.skill-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    background-color: var(--darker-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.skill-item:hover {
+    border-color: var(--primary-green);
+    transform: translateY(-2px);
+    box-shadow: 0 0 8px rgba(0, 255, 119, 0.5);
+}
+
+.skill-item i {
+    font-size: 1.5rem;
+    color: var(--primary-green);
+}
+
+/* Projects Page */
+.projects-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.project-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.project-icon {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 1.5rem;
+    background: linear-gradient(135deg, var(--primary-green), #00E06B);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    color: var(--dark-bg);
+    box-shadow: 0 0 20px var(--primary-green);
+}
+
+.processes-panel {
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 2rem;
+    overflow: hidden;
+}
+
+.panel-header {
+    padding: 1.5rem;
+    background-color: var(--darker-bg);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.panel-header i {
+    color: var(--primary-green);
+}
+
+.processes-content {
+    padding: 1.5rem;
+}
+
+.processes-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1.5rem;
+}
+
+.processes-table th {
+    text-align: left;
+    padding: 1rem;
+    background-color: var(--darker-bg);
+    color: var(--text-white);
+    border-bottom: 2px solid var(--border-color);
+}
+
+.processes-table td {
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-light);
+}
+
+.processes-table tr.empty-row td {
+    text-align: center;
+    color: var(--text-light);
+    opacity: 0.6;
+    padding: 2rem;
+}
+
+.processes-table tr:not(.empty-row):hover {
+    background-color: #252834; /* Slightly lighter hover on row */
+}
+
+.control-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.results-panel {
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    overflow: hidden;
+}
+
+.results-panel.hidden {
+    display: none;
+}
+
+.results-content {
+    padding: 1.5rem;
+}
+
+.gantt-chart {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: var(--darker-bg);
+    border-radius: 10px;
+    min-height: 100px;
+    overflow-x: auto;
+}
+
+.gantt-item {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin: 0.25rem;
+    background-color: var(--primary-green);
+    color: var(--dark-bg);
+    border-radius: 5px;
+    font-weight: 600;
+    text-align: center;
+    min-width: 60px;
+}
+
+/* Example of using secondary color for process differentiation */
+.gantt-chart .process-P2 {
+    background-color: var(--secondary-blue);
+    color: var(--dark-bg);
+}
+
+.metrics {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.metric-item {
+    flex: 1;
+    min-width: 200px;
+    padding: 1rem;
+    background-color: var(--darker-bg);
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+}
+
+.metric-label {
+    display: block;
+    color: var(--text-light);
+    margin-bottom: 0.5rem;
+}
+
+.metric-value {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--primary-green);
+    text-shadow: 0 0 5px rgba(0, 255, 119, 0.5);
+}
+
+/* Contact Page */
+.contact-container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.contact-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.contact-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.contact-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px rgba(0, 255, 119, 0.2); /* Green hover glow */
+    border-color: var(--primary-green);
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 1rem;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--dark-bg);
+}
+
+.email-icon {
+    background-color: var(--primary-green);
+    box-shadow: 0 0 10px rgba(0, 255, 119, 0.5);
+}
+
+.github-icon {
+    background-color: var(--secondary-blue); /* Used Electric Blue here */
+    box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.contact-card h3 {
+    color: var(--text-white);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+}
+
+.contact-link {
+    color: var(--text-light);
+    text-decoration: none;
+    display: block;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.contact-link:hover {
+    color: var(--primary-green);
+    border-bottom-color: var(--primary-green);
+    text-shadow: 0 0 3px rgba(0, 255, 119, 0.5);
+}
+
+.work-together-card {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.work-together-card h2 {
+    color: var(--text-white);
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+}
+
+.work-together-card p {
+    color: var(--text-light);
+    margin-bottom: 2rem;
+    line-height: 1.8;
+}
+
+.status-info {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-light);
+}
+
+.status-item i {
+    color: var(--primary-green);
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Slightly darker overlay */
+    backdrop-filter: blur(8px);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    background-color: var(--darker-bg); /* Use slightly lighter dark for modal */
+    border-radius: 15px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    border: 1px solid var(--primary-green); /* Green border accent */
+    box-shadow: 0 0 20px rgba(0, 255, 119, 0.3);
+}
+
+.modal-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    color: var(--primary-green);
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--text-white);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    color: var(--primary-green);
+    transform: rotate(90deg);
+}
+
+.modal-body {
+    padding: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-white);
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    background-color: var(--dark-bg); /* Darker input background */
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    color: var(--text-white);
+    font-size: 1rem;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-green);
+    box-shadow: 0 0 5px rgba(0, 255, 119, 0.5);
+}
+
+/* Resume Modal */
+.resume-modal-content {
+    max-width: 90%;
+    width: 1000px;
+    max-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.resume-modal .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.resume-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.resume-modal-body {
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(95vh - 80px);
+    flex: 1;
+    /* Custom scrollbar styling */
+    scrollbar-width: thin;
+    scrollbar-color: var(--primary-green) var(--darker-bg);
+}
+
+.resume-modal-body::-webkit-scrollbar {
+    width: 8px;
+}
+
+.resume-modal-body::-webkit-scrollbar-track {
+    background: var(--darker-bg);
+    border-radius: 10px;
+}
+
+.resume-modal-body::-webkit-scrollbar-thumb {
+    background: var(--primary-green);
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0, 255, 119, 0.5);
+}
+
+.resume-modal-body::-webkit-scrollbar-thumb:hover {
+    background: #00E06B;
+    box-shadow: 0 0 8px rgba(0, 255, 119, 0.7);
+}
+
+.resume-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    background-color: var(--dark-bg);
+    padding: 1rem;
+}
+
+.resume-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 5px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .home-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .name-title {
+        font-size: 2.5rem;
+    }
+
+    .nav-menu {
+        gap: 0.25rem;
+    }
+
+    .nav-link {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .contact-cards {
+        grid-template-columns: 1fr;
+    }
+
+    .status-info {
+        flex-direction: column;
+        gap: 1rem;
+    }
+}

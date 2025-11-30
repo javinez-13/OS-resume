@@ -30,25 +30,14 @@ document.addEventListener('DOMContentLoaded', function() {
             pages.forEach(page => page.classList.remove('active'));
             document.getElementById(targetPage).classList.add('active');
 
-            // Handle "Get In Touch" button on home page
-            if (this.textContent === 'Home' && targetPage === 'home') {
-                const getInTouchBtn = document.querySelector('.btn-secondary');
-                if (getInTouchBtn) {
-                    getInTouchBtn.addEventListener('click', function() {
-                        navLinks.forEach(nl => nl.classList.remove('active'));
-                        document.querySelector('[data-page="contact"]').classList.add('active');
-                        pages.forEach(page => page.classList.remove('active'));
-                        document.getElementById('contact').classList.add('active');
-                    });
-                }
-            }
+            // Removed: binding a general '.btn-secondary' handler here as it may match other buttons.
         });
     });
 
-    // Handle "Get In Touch" button on home page
-    const getInTouchBtn = document.querySelector('.btn-secondary');
-    if (getInTouchBtn) {
-        getInTouchBtn.addEventListener('click', function() {
+    // Handle "Hire Me" button on home page
+    const heroHireBtn = document.getElementById('hero-hire-btn');
+    if (heroHireBtn) {
+        heroHireBtn.addEventListener('click', function() {
             navLinks.forEach(nl => nl.classList.remove('active'));
             document.querySelector('[data-page="contact"]').classList.add('active');
             pages.forEach(page => page.classList.remove('active'));
@@ -56,9 +45,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    // NOTE: removed previous 'btn-blue' projects binding to prevent conflicts with the resume button.
+
     // Resume Modal Functions
     if (viewResumeBtn) {
-        viewResumeBtn.addEventListener('click', function() {
+        viewResumeBtn.addEventListener('click', function(e) {
+            e.preventDefault();
             resumeModal.classList.add('active');
             document.body.style.overflow = 'hidden'; // Prevent background scrolling
         });

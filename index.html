@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <!-- Navigation -->
+
     <nav class="navbar">
         <div class="nav-container">
             <div class="logo">
@@ -24,33 +24,48 @@
         </div>
     </nav>
 
-    <!-- Home Page -->
     <section id="home" class="page active">
-        <div class="home-container">
-            <div class="home-left">
-                <div class="profile-image-container">
-                    <img src="assets/jk.jpg" alt="John Kevin Javinez" class="profile-image">
+        <div class="hero">
+            <div class="hero-overlay"></div>
+            <div class="hero-inner">
+                <div class="hero-left">
+                    <ul class="social-icons">
+                        <li><a href="#" aria-label="twitter"><i class="fab fa-twitter"></i></a></li>
+                        <li><a href="#" aria-label="facebook"><i class="fab fa-facebook-f"></i></a></li>
+                        <li><a href="#" aria-label="github"><i class="fab fa-github"></i></a></li>
+                        <li><a href="#" aria-label="instagram"><i class="fab fa-instagram"></i></a></li>
+                    </ul>
+
+                    <div class="hero-content">
+                        <p class="hero-sub">I'm a <strong>Software Engineer</strong></p>
+                        <h1 class="hero-title">I'm a Software Engineer</h1>
+                        <p class="hero-desc">Highly motivated Software Engineer with  experience in the full software development lifecycle, from concept to deployment. Detail-oriented Front-End Software Engineer  dedicated to creating intuitive, responsive, and accessible user interfaces. Passionate about applying best practices in state management and translating complex technical requirements into seamless user experiences.</p>
+
+                        <div class="hero-cta">
+                            <button class="btn btn-primary" id="view-resume-btn">
+                                <i class="fas fa-file-alt"></i>
+                                View Resume
+                                <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button class="btn btn-secondary" id="hero-hire-btn">
+                                Feel free to inquire
+                            </button>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="hero-right">
+                    <div class="portrait-wrap">
+                        <img src="assets/jk.jpg" alt="Portrait" class="portrait">
+                    </div>
+                </div>
+
             </div>
-            <div class="home-right">
-                <div class="welcome-text">WELCOME!</div>
-                <h1 class="name-title">
-                    <span class="name-blue">I'm John Kevin</span> <span class="name-white">Javinez</span>
-                </h1>
-                <p class="role-text">Software Engineer</p>
-                <p class="description-text">
-                    Highly motivated Software Engineer with  experience in the full software development lifecycle, from concept to deployment. Detail-oriented Front-End Software Engineer  dedicated to creating intuitive, responsive, and accessible user interfaces. Passionate about applying best practices in state management and translating complex technical requirements into seamless user experiences.
-                </p>
-                <div class="cta-buttons">
-                    <button class="btn btn-primary" id="view-resume-btn">
-                        <i class="fas fa-file-alt"></i>
-                        View Resume
-                        <i class="fas fa-arrow-right"></i>
-                    </button>
-                    <button class="btn btn-secondary">
-                        Feel free to inquire
-                    </button>
-                </div>
+
+            <div class="hero-slider">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
         </div>
     </section>

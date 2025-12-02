@@ -188,6 +188,13 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('gantt-chart').innerHTML = '';
         document.getElementById('avg-waiting-time').textContent = '-';
         document.getElementById('avg-turnaround-time').textContent = '-';
+        const avgWaitingHero = document.getElementById('avg-waiting-time-hero');
+        const avgTurnaroundHero = document.getElementById('avg-turnaround-time-hero');
+        if (avgWaitingHero) avgWaitingHero.textContent = '-';
+        if (avgTurnaroundHero) avgTurnaroundHero.textContent = '-';
+
+        const summaryTbody = document.getElementById('process-summary-tbody');
+        if (summaryTbody) summaryTbody.innerHTML = '<tr class="empty-row"><td colspan="6">No processes added.</td></tr>';
     });
 
     // Run SRTF Algorithm
@@ -318,20 +325,123 @@ document.addEventListener('DOMContentLoaded', function() {
         
         resultsPanel.classList.remove('hidden');
 
-        // Display Gantt Chart
+        // Display Gantt Chart (render with absolute positions so start times map to left offset)
         ganttChartDiv.innerHTML = '';
-        result.ganttChart.forEach((item, index) => {
+
+        // Where each unit of time equals this number of pixels
+        const unitWidth = 40;
+
+        // find min start and max end (handle empty gantt chart)
+        if (!result.ganttChart || result.ganttChart.length === 0) {
+            // no bars, clear and return
+            ganttChartDiv.innerHTML = '<div class="gantt-track"></div>';
+            return;
+        }
+        const minStart = Math.min(...result.ganttChart.map(i => i.start));
+        const maxEnd = Math.max(...result.ganttChart.map(i => i.end));
+        const totalUnits = maxEnd - minStart;
+        const trackWidth = Math.max(totalUnits * unitWidth, 200);
+
+        // Create track container (relative) that holds absolute-positioned bars
+        const track = document.createElement('div');
+        track.className = 'gantt-track';
+        track.style.width = `${trackWidth}px`;
+        ganttChartDiv.appendChild(track);
+
+        const colorMap = {};
+        const palette = [
+            'var(--primary-green)',
+            'var(--secondary-blue)',
+            '#a67fc4',
+            '#7c6ccf',
+            '#8367b6',
+            '#00b388',
+            '#ffb86b',
+            '#ff7b72'
+        ];
+
+        function getColorForProcess(name) {
+            if (colorMap[name]) return colorMap[name];
+            const key = Object.keys(colorMap).length % palette.length;
+            colorMap[name] = palette[key];
+            return colorMap[name];
+        }
+
+        // Create bars
+        result.ganttChart.forEach(item => {
             const duration = item.end - item.start;
-            const ganttItem = document.createElement('div');
-            ganttItem.className = 'gantt-item';
-            ganttItem.style.width = `${duration * 40}px`;
-            ganttItem.textContent = `${item.process} (${item.start}-${item.end})`;
-            ganttChartDiv.appendChild(ganttItem);
+            const bar = document.createElement('div');
+            bar.className = 'gantt-bar gantt-item';
+            const sanitizedName = item.process.replace(/[^a-zA-Z0-9\-_]/g, '');
+            bar.classList.add(`process-${sanitizedName}`);
+            const left = (item.start - minStart) * unitWidth;
+            const width = Math.max(duration * unitWidth, 40);
+            bar.style.left = `${left}px`;
+            bar.style.width = `${width}px`;
+            // set background color using palette, use fallback if var style
+            let bg = getColorForProcess(sanitizedName);
+            if (bg && bg.startsWith('var(')) {
+                // resolve css variable to a computed color
+                const varName = bg.slice(4, -1).trim();
+                const computedColor = getComputedStyle(document.documentElement).getPropertyValue(varName);
+                if (computedColor) bg = computedColor.trim();
+            }
+            if (bg) {
+                bar.style.backgroundColor = bg;
+            }
+            bar.textContent = `${item.process} (${item.start}-${item.end})`;
+            track.appendChild(bar);
         });
 
-        // Display metrics
-        document.getElementById('avg-waiting-time').textContent = result.avgWaitingTime;
-        document.getElementById('avg-turnaround-time').textContent = result.avgTurnaroundTime;
+        // Add timeline axis
+        const axis = document.createElement('div');
+        axis.className = 'gantt-time-axis';
+        for (let t = minStart; t <= maxEnd; t++) {
+            const tick = document.createElement('div');
+            tick.className = 'time-tick';
+            tick.style.minWidth = `${unitWidth}px`;
+            tick.textContent = `${t}`;
+            axis.appendChild(tick);
+        }
+        ganttChartDiv.appendChild(axis);
+
+        // Display metrics (update both existing and new UI elements)
+        const avgWaiting = result.avgWaitingTime;
+        const avgTurnaround = result.avgTurnaroundTime;
+        const avgWaitingEl = document.getElementById('avg-waiting-time');
+        const avgTurnaroundEl = document.getElementById('avg-turnaround-time');
+        const avgWaitingHero = document.getElementById('avg-waiting-time-hero');
+        const avgTurnaroundHero = document.getElementById('avg-turnaround-time-hero');
+
+        if (avgWaitingEl) avgWaitingEl.textContent = avgWaiting;
+        if (avgTurnaroundEl) avgTurnaroundEl.textContent = avgTurnaround;
+        if (avgWaitingHero) avgWaitingHero.textContent = avgWaiting;
+        if (avgTurnaroundHero) avgTurnaroundHero.textContent = avgTurnaround;
+
+        // Populate Process summary table
+        const summaryTbody = document.getElementById('process-summary-tbody');
+        if (summaryTbody) {
+            summaryTbody.innerHTML = '';
+            // Sort processes by name (P1,P2,...) for consistent ordering in the table
+            const sortedProcesses = result.processes.slice().sort((a, b) => {
+                const aNum = parseInt(a.name.replace(/[^0-9]/g, '')) || 0;
+                const bNum = parseInt(b.name.replace(/[^0-9]/g, '')) || 0;
+                return aNum - bNum;
+            });
+
+            sortedProcesses.forEach(p => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${p.name}</td>
+                    <td>${p.arrivalTime}</td>
+                    <td>${p.burstTime}</td>
+                    <td>${p.completionTime}</td>
+                    <td>${p.turnaroundTime}</td>
+                    <td>${p.waitingTime}</td>
+                `;
+                summaryTbody.appendChild(row);
+            });
+        }
 
         // Scroll to results
         resultsPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });

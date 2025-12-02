@@ -179,15 +179,53 @@
                     <span>Results</span>
                 </div>
                 <div class="results-content">
+                    <div class="panel-header">
+                        <i class="fas fa-clock"></i>
+                        <span>Gantt chart</span>
+                    </div>
                     <div id="gantt-chart" class="gantt-chart"></div>
-                    <div class="metrics">
-                        <div class="metric-item">
-                            <span class="metric-label">Average Waiting Time:</span>
-                            <span class="metric-value" id="avg-waiting-time">-</span>
+
+                    <!-- bottom grid: process table (left) and averages (right) -->
+                    <div class="results-bottom">
+                        <div class="process-table-card">
+                            <div class="panel-header">
+                                <i class="fas fa-table"></i>
+                                <span>Process table</span>
+                            </div>
+                            <div class="process-table-body">
+                                <table class="processes-table" id="process-summary-table">
+                                    <thead>
+                                        <tr>
+                                            <th>P</th>
+                                            <th>AT</th>
+                                            <th>BT</th>
+                                            <th>CT</th>
+                                            <th>TAT</th>
+                                            <th>WT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="process-summary-tbody">
+                                        <tr class="empty-row"><td colspan="6">No processes added.</td></tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        <div class="metric-item">
-                            <span class="metric-label">Average Turnaround Time:</span>
-                            <span class="metric-value" id="avg-turnaround-time">-</span>
+
+                        <div class="averages-card">
+                            <div class="panel-header">
+                                <i class="fas fa-chart-line"></i>
+                                <span>Averages</span>
+                            </div>
+                            <div class="averages-body">
+                                <div class="avg-item">
+                                    <div class="avg-label">Average turnaround time</div>
+                                    <div class="avg-value" id="avg-turnaround-time-hero">-</div>
+                                </div>
+                                <div class="avg-item">
+                                    <div class="avg-label">Average waiting time</div>
+                                    <div class="avg-value" id="avg-waiting-time-hero">-</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

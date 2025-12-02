@@ -614,17 +614,74 @@ body {
     overflow-x: auto;
 }
 
-.gantt-item {
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    margin: 0.25rem;
-    background-color: var(--primary-green);
-    color: var(--dark-bg);
-    border-radius: 5px;
+.gantt-track {
+    position: relative;
+    height: 48px;
+}
+
+.gantt-item, .gantt-bar {
+    position: absolute;
+    top: 4px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 999px;
+    color: #fff;
     font-weight: 600;
     text-align: center;
-    min-width: 60px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
+
+/* new results bottom layout */
+.results-bottom {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 1.5rem;
+}
+
+@media (max-width: 900px) {
+    .results-bottom {
+        grid-template-columns: 1fr;
+    }
+}
+
+.process-table-card, .averages-card {
+    padding: 1rem;
+    background-color: var(--card-bg);
+    border-radius: 15px;
+    border: 1px solid var(--border-color);
+}
+
+.process-table-body { padding: 0.5rem; }
+
+.processes-table th, .processes-table td {
+    padding: 0.5rem 0.75rem;
+}
+
+.averages-body { padding: 1rem; display: flex; flex-direction: column; gap: 1rem; }
+.avg-item { background-color: var(--darker-bg); padding: 1rem; border-radius: 10px; border: 1px solid var(--border-color); }
+.avg-label { color: var(--text-light); font-size: 0.85rem; }
+.avg-value { font-size: 1.75rem; font-weight: 700; color: var(--primary-green); }
+
+/* adjust gantt bars to be pill-shaped like the screenshot */
+.gantt-item { border-radius: 999px; padding: 0.6rem 1rem; margin-right: 0.6rem; }
+
+/* add process specific colors to differentiate bars */
+.gantt-chart .process-P1 { background-color: #a67fc4; color: #fff; }
+.gantt-chart .process-P2 { background-color: #7c6ccf; color: #fff; }
+.gantt-chart .process-P3 { background-color: #8367b6; color: #fff; }
+
+/* Default process color (green) */
+.gantt-chart .process-default { background-color: var(--primary-green); color: #07221b; }
+
+.gantt-time-axis { margin-top: 1rem; display: flex; gap: 0; }
+.gantt-time-axis .time-tick { min-width: 40px; text-align: center; color: var(--text-light); font-size: 0.9rem; }
 
 /* Example of using secondary color for process differentiation */
 .gantt-chart .process-P2 {
